@@ -1,0 +1,54 @@
+<?php
+// Define the Book class
+class Book {
+    // Properties (attributes)
+    public $title;
+    public $author;
+    public $pages;
+    private $isRead;
+
+    // Constructor to initialize the Book attributes
+    public function __construct($title, $author, $pages) {
+        $this->title = $title;
+        $this->author = $author;
+        $this->pages = $pages;
+        $this->isRead = false;
+    }
+
+    // Method to mark the book as read
+    public function markAsRead() {
+        $this->isRead = true;
+        echo "{$this->title} by {$this->author} has been marked as read.<br>";
+    }
+
+    // Method to get a summary of the book
+    public function getSummary() {
+        $readStatus = $this->isRead ? "Read" : "Not Read";
+        return "{$this->title} by {$this->author} has {$this->pages} pages. Read status: {$readStatus}.<br>";
+    }
+
+    // Method to compare the page count with another book
+    public function comparePages(Book $otherBook) {
+        if ($this->pages > $otherBook->pages) {
+            return "{$this->title} has more pages than {$otherBook->title}.<br>";
+        } elseif ($this->pages < $otherBook->pages) {
+            return "{$otherBook->title} has more pages than {$this->title}.<br>";
+        } else {
+            return "{$this->title} and {$otherBook->title} have the same number of pages.<br>";
+        }
+    }
+}
+
+// Create instances of the Book class
+$book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 180);
+$book2 = new Book("1984", "George Orwell", 328);
+
+// Interact with the instances
+echo $book1->getSummary();
+echo $book2->getSummary();
+
+$book1->markAsRead();
+echo $book1->getSummary();
+
+echo $book1->comparePages($book2);
+?>
